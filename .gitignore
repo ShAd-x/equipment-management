@@ -8,6 +8,7 @@ client/bazel-out
 
 # Node
 client/node_modules
+server/node_modules
 client/.vscode
 client/npm-debug.log
 client/yarn-error.log
