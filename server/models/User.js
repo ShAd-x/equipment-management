@@ -10,6 +10,14 @@ const userSchema = new Schema({
         required: true,
         unique: true
     },
+    password: {
+        type: String,
+        required: true
+    },
+    role: {
+        type: String,
+        default: 'user'
+    }
 });
 
 const User = model('User', userSchema);

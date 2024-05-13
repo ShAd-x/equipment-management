@@ -12,11 +12,13 @@ const userController = {
     createUser: async (req, res) => {
         const user = new User({
             name: req.body.name,
-            email: req.body.email
+            email: req.body.email,
+            password: req.body.password,
+            role: req.body.role
         });
 
-        if (!user.name || !user.email) {
-            return res.status(400).json({ message: 'Name and email are required' });
+        if (!user.name || !user.email || !user.password || !user.role) {
+            return res.status(400).json({ message: 'Please fill in all fields' });
         }
 
         try {
