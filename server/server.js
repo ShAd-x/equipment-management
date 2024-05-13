@@ -1,15 +1,19 @@
-const express = require('express');
-const mongoose = require('mongoose');
+import express, { json } from 'express';
+import { connect } from 'mongoose';
 const app = express();
 
 // Middleware
-app.use(express.json());
+app.use(json());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://localhost/projet-angular')
-    .then(() => console.log('Connected to MongoDB'))
+// Routes
+app.use('/api/users', require('./routes/users').default);
+
+// Connection à MongoDB
+connect('mongodb://root:root@host.docker.internal:27017/angularprojet?authSource=admin')
+    .then(() => {
+        console.log('Connected to MongoDB')
+
+        const port = 3000;
+        app.listen(port, () => console.log(`Server running on port ${port}`));
+    })
     .catch(err => console.error('Could not connect to MongoDB', err));
-
-// Start server
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log(`Server running on port ${port}`));
