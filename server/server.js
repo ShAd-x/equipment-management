@@ -1,15 +1,15 @@
-import express, { json } from 'express';
-import { connect } from 'mongoose';
+const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 // Middleware
-app.use(json());
+app.use(express.json());
 
 // Routes
-app.use('/api/users', require('./routes/users').default);
+app.use('/api/users', require('./routes/users'));
 
 // Connection à MongoDB
-connect('mongodb://root:root@host.docker.internal:27017/angularprojet?authSource=admin')
+mongoose.connect('mongodb://root:root@host.docker.internal:27017/angularprojet?authSource=admin')
     .then(() => {
         console.log('Connected to MongoDB')
 

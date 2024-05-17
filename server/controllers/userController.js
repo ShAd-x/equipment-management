@@ -1,9 +1,9 @@
-import User, { find } from '../models/User';
+const User = require('../models/User');
 
 const userController = {
     getAllUsers: async (_req, res) => {
         try {
-            const users = await find();
+            const users = await User.find();
             res.json(users);
         } catch (error) {
             res.status(500).json({ message: error.message });
@@ -30,4 +30,4 @@ const userController = {
     }
 };
 
-export default userController;
+module.exports = userController;
