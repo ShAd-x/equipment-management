@@ -2,11 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 
+const userRoutes = require('./routes/users');
+const materialRoutes = require('./routes/materials');
+const assignmentRequestRoutes = require('./routes/assignmentRequests');
+
 // Middleware
 app.use(express.json());
 
 // Routes
-app.use('/api/users', require('./routes/users'));
+app.use('/api/users', userRoutes);
+app.use('/api/materials', materialRoutes);
+app.use('/api/assignment-requests', assignmentRequestRoutes);
 
 // Connection à MongoDB
 mongoose.connect('mongodb://root:root@host.docker.internal:27017/angularprojet?authSource=admin')
