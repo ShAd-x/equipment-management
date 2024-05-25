@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header-left h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .header-center nav {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .header-center nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 18px;
+  }
+  
+  .header-center nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .header-right .btn-logout {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+  }
+  
+  .header-right .btn-logout:hover {
+    background-color: #c82333;
+  }
+  
+  main {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  main h2 {
+    font-size: 32px;
+  }
+  

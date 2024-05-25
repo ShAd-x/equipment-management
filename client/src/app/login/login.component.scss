@@ -1,0 +1,98 @@
+/* Styles pour le header, le formulaire et le bouton */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .header-left h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .header-right {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn-login, .btn-signup {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .btn-signup {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  main {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  main h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  main p {
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  main h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  form {
+    display: inline-block;
+    text-align: left;
+  }
+  
+  form label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-submit {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 8px; /* Arrondir les bords du bouton */
+  }
+  
+  .btn-submit:hover {
+    background-color: #218838;
+  }
+  
+  .center-button {
+    display: flex;
+    justify-content: center;
+  }
+  
