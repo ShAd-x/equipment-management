@@ -1,10 +1,18 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const app = express();
+const cors = require('cors');
+const dotenv = require('dotenv');
 
 const userRoutes = require('./routes/users');
 const materialRoutes = require('./routes/materials');
 const assignmentRequestRoutes = require('./routes/assignmentRequests');
+const authRoutes = require('./routes/authRoutes');
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 // Middleware
 app.use(express.json());
@@ -13,13 +21,17 @@ app.use(express.json());
 app.use('/api/users', userRoutes);
 app.use('/api/materials', materialRoutes);
 app.use('/api/assignment-requests', assignmentRequestRoutes);
+app.use('/api/auth', authRoutes);
 
 // Connection à MongoDB
-mongoose.connect('mongodb://root:root@host.docker.internal:27017/angularprojet?authSource=admin')
-    .then(() => {
-        console.log('Connected to MongoDB')
+const PORT = process.env.PORT || 5000;
 
-        const port = 3000;
-        app.listen(port, () => console.log(`Server running on port ${port}`));
-    })
-    .catch(err => console.error('Could not connect to MongoDB', err));
+mongoose.connect(process.env.MONGO_URI)
+.then(() => {
+    console.log('Connected to MongoDB')
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}).catch(error => {
+    console.error(`Could not connect to MongoDB: ${error.message}`);
+});

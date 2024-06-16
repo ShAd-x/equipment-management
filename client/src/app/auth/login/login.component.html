@@ -1,0 +1,38 @@
+<header>
+  <div class="header-left">
+    <h1>Gestion Matériel Université</h1>
+  </div>
+  <div class="header-right">
+    <button class="btn-login">
+      <a href="/login">
+        Se connecter
+      </a>
+    </button>
+    <button class="btn-signup">
+      <a href="/register">
+        Créer un compte
+      </a>
+    </button>
+  </div>
+</header>
+
+<main>
+  <h2>Bienvenue sur le gestionnaire de matériel universitaire</h2>
+  <p>Ce site web a pour but de simplifier la gestion du matériel informatique et mobilier au sein de notre établissement</p>
+  
+  <h3>Connexion</h3>
+  <div class="login-container">
+    <form (submit)="login()">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+  </div>
+  <p>Pas de compte ? <a href="#">Créer un compte</a></p>
+</main>

@@ -1,17 +1,16 @@
 import { Routes } from '@angular/router';
-import { importProvidersFrom } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { bootstrapApplication } from '@angular/platform-browser';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MyMaterialComponent } from './my-material/my-material.component';
 import { MaterialRequestComponent } from './material-request/material-request.component';
+import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './auth/register/register.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'my-material', component: MyMaterialComponent },
-  { path: 'material-request', component: MaterialRequestComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'my-material', component: MyMaterialComponent, canActivate: [AuthGuard] },
+  { path: 'material-request', component: MaterialRequestComponent, canActivate: [AuthGuard] },
+  { path: '**', redirectTo: '' },
 ];
