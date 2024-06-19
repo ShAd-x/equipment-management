@@ -40,4 +40,8 @@ export class DashboardComponent implements OnInit {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  redirectToMaterialRequest() {
+    this.router.navigate(['/material-request']);
+  }
 }

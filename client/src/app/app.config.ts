@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { MyMaterialComponent } from './my-material/my-material.component';
 import { MaterialRequestComponent } from './material-request/material-request.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
@@ -20,7 +19,6 @@ import { routes } from './app.routes';
   declarations: [
     AppComponent,
     DashboardComponent,
-    MyMaterialComponent,
     MaterialRequestComponent,
     LoginComponent,
     RegisterComponent,
