@@ -1,40 +1,35 @@
-<header>
-    <div class="header-left">
-      <h1>Gestion Matériel Université</h1>
-    </div>
-    <nav class="header-center">
-      <a routerLink="/my-material" class="nav-link">Mon matériel</a>
-      <a routerLink="/material-request" class="nav-link">Demande de matériel</a>
-    </nav>
-    <div class="header-right">
-      <button (click)="logout()" class="btn btn-primary">Se déconnecter</button>
-    </div>
-  </header>
+<app-header-post-login></app-header-post-login>
+
+<main>
+  <h2>Tableau de bord</h2>
   
-  <main>
-    <h2>Tableau de bord</h2>
-    <div class="dashboard">
-      <h3>Mon matériel attribué</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>Type</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let material of materials">
-            <td>{{ material.type }}</td>
-            <td>
-              <button class="btn-return">Rendre</button>
-              <button class="btn-consult">Consulter</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="request-material">
-        <button class="btn-request-material">Demande de matériel</button>
-      </div>
+  <div class="dashboard">
+    <div class="filter">
+      <label for="filter-type">Type :</label>
+      <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
     </div>
-  </main>
-  
+    
+    <h3>Mon matériel attribué</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let material of filteredMaterials">
+          <td>{{ material.type }}</td>
+          <td>
+            <button class="btn-return">Rendre</button>
+            <button class="btn-consult">Consulter</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="request-material">
+      <button class="btn-request-material">Demande de matériel</button>
+    </div>
+  </div>
+</main>
