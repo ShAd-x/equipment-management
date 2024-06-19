@@ -1,20 +1,4 @@
-<header>
-  <div class="header-left">
-    <h1>Gestion Matériel Université</h1>
-  </div>
-  <div class="header-right">
-    <button class="btn-login">
-      <a href="/login">
-        Se connecter
-      </a>
-    </button>
-    <button class="btn-signup">
-      <a href="/register">
-        Créer un compte
-      </a>
-    </button>
-  </div>
-</header>
+<app-header></app-header>
 
 <main>
   <h2>Bienvenue sur le gestionnaire de matériel universitaire</h2>
@@ -24,15 +8,17 @@
   <div class="login-container">
     <form (submit)="login()">
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+        <label for="email">Nom d'utilisateur:</label>
+        <input type="text" id="email" [(ngModel)]="user.email" name="email" required>
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
+        <label for="password">Mot de passe:</label>
         <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
       </div>
-      <button type="submit" class="btn btn-primary">Login</button>
+      <div class="center-button">
+        <button type="submit" class="btn-submit">Se connecter</button>
+      </div>
     </form>
   </div>
-  <p>Pas de compte ? <a href="#">Créer un compte</a></p>
+  <p>Pas de compte ? <a href="/register" class="create-account-link">Créer un compte</a></p>
 </main>
