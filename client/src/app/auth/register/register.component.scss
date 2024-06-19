@@ -1,58 +1,10 @@
-/* Styles pour le formulaire et le bouton */
-
-main {
-    text-align: center;
-    margin-top: 50px;
-  }
-  
-  main h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  main p {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
-  
-  form {
-    display: inline-block;
-    text-align: left;
-    width: 100%; /* Pour que le formulaire prenne toute la largeur */
-    max-width: 300px; /* Limiter la largeur maximale du formulaire */
-  }
-  
-  form label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    text-align: left;
-    padding-left: 2px; /* Petit padding pour aligner le texte */
-  }
-  
-  form input, form select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #000;
-    border-radius: 4px;
-    background-color: #fff;
-  }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Alignement à gauche */
-    text-align: left;
-  }
-  
-  .button-group {
+.button-group {
     display: flex;
     justify-content: space-between;
-    gap: 10px; /* Espace entre les boutons */
+    gap: 10px;
   }
-  
-  .btn-cancel {
+
+.btn-cancel {
     background-color: #6c757d;
     color: white;
     border: none;
@@ -60,37 +12,17 @@ main {
     cursor: pointer;
     font-size: 16px;
     border-radius: 8px;
-  }
-  
-  .btn-cancel:hover {
+}
+
+.btn-cancel:hover {
     background-color: #5a6268;
-  }
-  
-  .btn-submit {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 8px;
-  }
-  
-  .btn-submit:hover {
-    background-color: #218838;
-  }
-  
-  .center-button {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .register-container {
+}
+
+.register-container {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-  }
-  
+}

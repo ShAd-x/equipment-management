@@ -48,7 +48,16 @@ const materialController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    }
+    },
+
+    getUnassignedMaterials: async (_req, res) => {
+        try {
+            const materials = await Material.find({ utilisePar: { $exists: false } });
+            res.json(materials);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
 };
 
 module.exports = materialController;

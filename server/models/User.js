@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
+const Roles = require('./Role');
 
 const userSchema = new Schema({
     name: {
@@ -17,8 +18,8 @@ const userSchema = new Schema({
         required: true
     },
     role: {
-        type: String,
-        default: 'user'
+        type: Number, enum: [Roles.ADMIN, Roles.UTILISATEUR, Roles.ORGANISATION],
+        default: Roles.UTILISATEUR
     }
 });
 

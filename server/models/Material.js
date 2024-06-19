@@ -5,6 +5,7 @@ const MaterialSchema = new Schema({
     type: String,
     etat: String,
     salle: String,
+    organisation: { type: Boolean, default: false },
     utilisePar: { type: Schema.Types.ObjectId, ref: 'User' },
     dateCreation: { type: Date, default: Date.now },
     dateModification: { type: Date, default: Date.now }

@@ -2,7 +2,7 @@
 
 <main>
   <h2>Administration</h2>
-  
+
   <div class="admin-container">
     <div class="requests">
       <h3>Demande d'attribution</h3>
@@ -14,21 +14,25 @@
         <thead>
           <tr>
             <th>Type</th>
+            <th>Etat</th>
+            <th>Utilisateur demandant</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let request of filteredMaterialRequests">
-            <td>{{ request.type }}</td>
+            <td>{{ request.material.type }}</td>
+            <td>{{ request.statut }}</td>
+            <td>{{ request.user.name }}</td>
             <td>
-              <button class="btn-approve" (click)="approveRequest(request)">Accorder</button>
-              <button class="btn-deny" (click)="denyRequest(request)">Refuser</button>
+              <button class="btn-approve" (click)="approveRequest(request._id)">Accorder</button>
+              <button class="btn-deny" (click)="denyRequest(request._id)">Refuser</button>
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-    
+
     <div class="inventory">
       <h3>Liste matériel renseigné</h3>
       <div class="filter">
@@ -39,14 +43,18 @@
         <thead>
           <tr>
             <th>Type</th>
-            <th>Location</th>
+            <th>Utilisé par</th>
+            <th>Salle</th>
+            <th>Réservé aux organisations</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let material of filteredMaterials">
             <td>{{ material.type }}</td>
-            <td>{{ material.location }}</td>
+            <td>{{ material.utilisePar?.name }}</td>
+            <td>{{ material.salle }}</td>
+            <td>{{ material.organisation ? 'Oui' : 'Non' }}</td>
             <td>
               <button class="btn-remove" (click)="removeMaterial(material)">Retirer</button>
             </td>
@@ -54,7 +62,22 @@
         </tbody>
       </table>
       <div class="add-material">
-        <button class="btn-add" (click)="addMaterial()">Ajouter un matériel</button>
+        <h3>Ajouter un matériel</h3>
+        <form (ngSubmit)="addMaterial()">
+          <div class="form-group">
+            <label for="material-type">Type</label>
+            <input type="text" id="material-type" [(ngModel)]="newMaterial.type" name="type" required>
+          </div>
+          <div class="form-group">
+            <label for="material-location">Salle</label>
+            <input type="text" id="material-location" [(ngModel)]="newMaterial.salle" name="location" required>
+          </div>
+          <div class="form-group">
+            <label for="reserveAuxOrganisations">Réservé aux organisations</label>
+            <input type="checkbox" id="reserveAuxOrganisations" [(ngModel)]="newMaterial.organisation" name="reserveAuxOrganisations">
+          </div>
+          <button type="submit" class="btn-add">Ajouter</button>
+        </form>
       </div>
     </div>
   </div>

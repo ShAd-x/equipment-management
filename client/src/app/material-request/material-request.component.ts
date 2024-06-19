@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderPostLoginComponent } from '../header-post-login/header-post-login.component';
 import { Router } from '@angular/router';
-
-interface Material {
-  type: string;
-  location: string;
-}
+import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api.service';
+import { Material } from '../models/material';
 
 @Component({
   selector: 'app-material-request',
@@ -17,22 +15,48 @@ interface Material {
   imports: [CommonModule, FormsModule, HeaderPostLoginComponent]
 })
 export class MaterialRequestComponent implements OnInit {
-  materials: Material[] = [
-    { type: 'Table', location: 'Stocké en A110' },
-    { type: 'Ordinateur portable', location: 'Stocké en A112' },
-    { type: 'Routeur internet', location: 'Stocké en A114' }
-  ];
+  unassignedMaterials: Material[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
+    this.getUnassignedMaterials();
     this.applyFilter();
   }
 
+  // Récupérer les matériels non assignés
+  getUnassignedMaterials() {
+    this.apiService.get<Material[]>('materials/unassigned')
+      .subscribe(materials => {
+        this.unassignedMaterials = materials;
+        this.filteredMaterials = materials;
+      });
+  }
+
+  requestMaterial(materialId: string) {
+    this.apiService.post('assignment-requests', { materialId })
+      .subscribe(
+        response => {
+          console.log('Material request created:', response);
+          this.getUnassignedMaterials();
+        },
+        error => {
+          console.error('Error creating material request:', error);
+        }
+      );
+  }
+
+  onRequestMaterial(material: Material) {
+    if (material._id) {
+      this.requestMaterial(material._id);
+    }
+  }
+
+  // Filtrer les matériels non assignés par type
   applyFilter() {
-    this.filteredMaterials = this.materials.filter(material =>
+    this.filteredMaterials = this.unassignedMaterials.filter(material =>
       material.type.toLowerCase().includes(this.filterType.toLowerCase())
     );
   }

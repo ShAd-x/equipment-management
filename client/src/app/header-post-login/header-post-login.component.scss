@@ -1,45 +1,46 @@
-.header {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #000;
     color: white;
-    padding: 20px; /* Augmenter le padding pour augmenter la hauteur du header */
-    height: 70px; /* Ajuster la hauteur */
+    padding: 20px;
+    height: 70px;
     box-sizing: border-box;
-  }
-  
-  .header-left h1 {
+    border-radius: 7px;
+}
+
+.header-left h1 {
     margin: 0;
     font-size: 24px;
-  }
-  
-  .header-center {
+}
+
+.header-center {
     display: flex;
     gap: 20px;
     flex-grow: 1;
-    justify-content: center; /* Centrer les éléments au milieu */
-  }
-  
-  .header-center .nav-link {
+    justify-content: center;
+}
+
+.header-center .nav-link {
     color: white;
     text-decoration: none;
     font-size: 16px;
-    padding: 10px 15px; /* Augmentez le padding pour plus de visibilité */
+    padding: 10px 15px;
     border-radius: 5px;
     transition: background-color 0.3s;
-  }
-  
-  .header-center .nav-link:hover {
+}
+
+.header-center .nav-link:hover {
     background-color: #555;
-  }
-  
-  .header-right {
+}
+
+.header-right {
     display: flex;
     gap: 10px;
-  }
-  
-  .btn-logout {
+}
+
+.btn-logout {
     background-color: #ff4d4d;
     color: white;
     border: none;
@@ -47,9 +48,8 @@
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
-  }
-  
-  .btn-logout:hover {
+}
+
+.btn-logout:hover {
     background-color: #cc0000;
-  }
-  
+}

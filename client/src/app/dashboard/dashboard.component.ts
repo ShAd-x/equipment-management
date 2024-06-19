@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../services/dashboard.service';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HeaderPostLoginComponent } from '../header-post-login/header-post-login.component';
-
-interface Material {
-  type: string;
-  status: string;
-}
+import { Material } from '../models/material';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,10 +19,10 @@ export class DashboardComponent implements OnInit {
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
-  constructor(private authService: AuthService, private router: Router, private dashboardService: DashboardService) {}
+  constructor(private authService: AuthService, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
-    this.materials = this.dashboardService.getMaterials();
+    // this.materials = this.apiService.get<Material[]>('materials');
     this.applyFilter();
   }
 

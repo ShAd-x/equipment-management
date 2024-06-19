@@ -1,5 +1,6 @@
 const AssignmentRequest = require('../models/AssignmentRequest');
 const Material = require('../models/Material');
+const Roles = require('../models/Role');
 const User = require('../models/User');
 
 const assignmentRequestController = {
@@ -13,23 +14,71 @@ const assignmentRequestController = {
     },
 
     createRequest: async (req, res) => {
-        const request = new AssignmentRequest(req.body);
+        const { materialId } = req.body;
+        const userId = req.user._id;
+
         try {
-            const newRequest = await request.save();
-            res.status(201).json(newRequest);
+          const material = await Material.findById(materialId);
+          if (!material) {
+            return res.status(404).json({ message: 'Material not found' });
+          }
+
+          // Vérifier si le matériel est réservé aux organisations
+          if (material.organisation) {
+            const user = await User.findById(userId);
+            if (user.role !== Roles.ADMIN && user.role !== Roles.ORGANISATION) {
+              return res.status(403).json({ message: 'Only organizations or admins can request this material' });
+            }
+          }
+
+          const request = new AssignmentRequest({ material: materialId, user: userId });
+          const newRequest = await request.save();
+          res.status(201).json(newRequest);
         } catch (error) {
-            res.status(400).json({ message: error.message });
+          res.status(400).json({ message: error.message });
         }
     },
 
-    updateRequestStatus: async (req, res) => {
-        try {
-            const updatedRequest = await AssignmentRequest.findByIdAndUpdate(req.params.id, { statut: req.body.statut }, { new: true });
-            if (!updatedRequest) return res.status(404).json({ message: 'Request not found' });
-            res.json(updatedRequest);
-        } catch (error) {
-            res.status(400).json({ message: error.message });
+    approveRequest: async (req, res) => {
+      const requestId = req.params.id;
+
+      try {
+        const request = await AssignmentRequest.findById(requestId).populate('material user');
+        if (!request) {
+          return res.status(404).json({ message: 'Request not found' });
         }
+
+        // Mettre à jour le matériel avec l'utilisateur
+        const material = await Material.findById(request.material._id);
+        material.utilisePar = request.user._id;
+        await material.save();
+
+        // todo : si matériel réservé aux organisations, vérifier si l'utilisateur est bien une organisation
+        request.status = 'approuve';
+        await request.save();
+
+        res.json({ message: 'Request approved and material updated' });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    },
+
+    denyRequest: async (req, res) => {
+      const requestId = req.params.id;
+
+      try {
+        const request = await AssignmentRequest.findById(requestId);
+        if (!request) {
+          return res.status(404).json({ message: 'Request not found' });
+        }
+
+        request.status = 'refuse';
+        await request.save();
+
+        res.json({ message: 'Request denied and deleted' });
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
     },
 
     deleteRequest: async (req, res) => {
@@ -40,7 +89,16 @@ const assignmentRequestController = {
         } catch (error) {
             res.status(500).json({ message: error.message });
         }
-    }
+    },
+
+    getPendingRequests: async (_req, res) => {
+      try {
+        const requests = await AssignmentRequest.find({ status: 'en attente' }).populate('material user');
+        res.json(requests);
+      } catch (error) {
+        res.status(500).json({ message: error.message });
+      }
+    },
 };
 
 module.exports = assignmentRequestController;

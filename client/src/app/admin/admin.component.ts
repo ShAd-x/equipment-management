@@ -4,20 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HeaderPostLoginComponent } from '../header-post-login/header-post-login.component';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-
-interface MaterialRequest {
-  _id: string;
-  type: string;
-  user: string;
-  status: string;
-}
-
-interface Material {
-  _id: string;
-  type: string;
-  location: string;
-  assignedTo?: string;
-}
+import { AssignmentRequest } from '../models/assignmentRequest';
+import { Material } from '../models/material';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-admin',
@@ -27,13 +16,20 @@ interface Material {
   imports: [CommonModule, FormsModule, HeaderPostLoginComponent]
 })
 export class AdminComponent implements OnInit {
-  materialRequests: MaterialRequest[] = [];
+  materialRequests: AssignmentRequest[] = [];
   materials: Material[] = [];
-  filteredMaterialRequests: MaterialRequest[] = [];
+  filteredMaterialRequests: AssignmentRequest[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  newMaterial: Material = {
+    type: '',
+    organisation: false,
+    salle: '',
+    utilisePar: undefined
+  };
+
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
     this.getMaterialRequests();
@@ -41,24 +37,25 @@ export class AdminComponent implements OnInit {
   }
 
   getMaterialRequests() {
-    this.http.get<MaterialRequest[]>('/api/assignmentRequests')
+    this.apiService.get<AssignmentRequest[]>('assignment-requests/pending')
       .subscribe(requests => {
         this.materialRequests = requests;
-        this.applyFilter();
+        this.filteredMaterialRequests = requests;
+        console.log(requests);
       });
   }
 
   getMaterials() {
-    this.http.get<Material[]>('/api/materials')
+    this.apiService.get<Material[]>(`materials`)
       .subscribe(materials => {
         this.materials = materials;
-        this.applyFilter();
+        this.filteredMaterials = materials;
       });
   }
 
   applyFilter() {
     this.filteredMaterialRequests = this.materialRequests.filter(request =>
-      request.type.toLowerCase().includes(this.filterType.toLowerCase())
+      request.material.type.toLowerCase().includes(this.filterType.toLowerCase())
     );
 
     this.filteredMaterials = this.materials.filter(material =>
@@ -66,22 +63,31 @@ export class AdminComponent implements OnInit {
     );
   }
 
-  approveRequest(request: MaterialRequest) {
-    this.http.put(`/api/assignmentRequests/${request._id}`, { status: 'approved' })
+  approveRequest(requestId: string | undefined) {
+    this.apiService.put(`assignment-requests/${requestId}/approve`, {})
       .subscribe(() => this.getMaterialRequests());
   }
 
-  denyRequest(request: MaterialRequest) {
-    this.http.put(`/api/assignmentRequests/${request._id}`, { status: 'denied' })
+  denyRequest(requestId: string | undefined) {
+    this.apiService.put(`assignment-requests/${requestId}/deny`, {})
       .subscribe(() => this.getMaterialRequests());
   }
 
   removeMaterial(material: Material) {
-    this.http.delete(`/api/materials/${material._id}`)
+    this.apiService.delete(`materials/${material._id}`)
       .subscribe(() => this.getMaterials());
   }
 
   addMaterial() {
-    // Logic for adding a new material (you might want to open a modal or a new form)
+    this.apiService.post(`materials/`, this.newMaterial)
+      .subscribe(() => {
+        this.getMaterials();
+        this.newMaterial = {
+          type: '',
+          salle: '',
+          organisation: false,
+          utilisePar: undefined
+        };
+      });
   }
 }

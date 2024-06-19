@@ -1,108 +1,133 @@
 :host {
     display: block;
-  }
-  
-  .admin-container {
+}
+
+.admin-container {
     display: flex;
     justify-content: space-between;
     margin: 50px auto;
     max-width: 1200px;
-  }
-  
-  .requests, .inventory {
+}
+
+.requests, .inventory {
     width: 48%;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
-  }
-  
-  .filter {
+}
+
+.filter {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-  }
-  
-  .filter label {
+}
+
+.filter label {
     margin-right: 10px;
     font-weight: bold;
-  }
-  
-  .filter input {
+}
+
+.filter input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
     max-width: 300px;
-  }
-  
-  h3 {
+}
+
+h3 {
     font-size: 20px;
     margin-bottom: 20px;
-  }
-  
-  table {
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-  }
-  
-  th, td {
+}
+
+th, td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-  }
-  
-  th {
+}
+
+th {
     background-color: #f2f2f2;
     font-weight: bold;
-  }
-  
-  .btn-approve, .btn-deny, .btn-remove, .btn-add {
+}
+
+.btn-approve, .btn-deny, .btn-remove, .btn-add {
     border: none;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
-  }
-  
-  .btn-approve {
+}
+
+.btn-approve {
     background-color: #28a745;
     color: white;
-  }
-  
-  .btn-approve:hover {
+}
+
+.btn-approve:hover {
     background-color: #218838;
-  }
-  
-  .btn-deny {
+}
+
+.btn-deny {
     background-color: #ff6666;
     color: white;
-  }
-  
-  .btn-deny:hover {
+}
+
+.btn-deny:hover {
     background-color: #ff3333;
-  }
-  
-  .btn-remove {
+}
+
+.btn-remove {
     background-color: #ff6666;
     color: white;
-  }
-  
-  .btn-remove:hover {
+}
+
+.btn-remove:hover {
     background-color: #ff3333;
-  }
-  
-  .add-material {
+}
+
+.add-material {
     text-align: center;
-  }
-  
-  .btn-add {
+}
+
+.btn-add {
     background-color: #28a745;
     color: white;
-  }
-  
-  .btn-add:hover {
+}
+
+.btn-add:hover {
     background-color: #218838;
-  }
-  
+}
+
+.add-material form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.add-material .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.add-material label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.add-material input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.add-material input[type="checkbox"] {
+  margin-left: 10px;
+}

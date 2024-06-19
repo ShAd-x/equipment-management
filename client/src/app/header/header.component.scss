@@ -1,52 +1,52 @@
-:host {
+header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #000;
     color: white;
-    padding: 20px 20px; /* Augmenté la valeur de padding vertical pour augmenter la hauteur */
+    padding: 20px 20px;
     width: 100%;
     box-sizing: border-box;
-  }
-  
-  .header-left h1 {
+    border-radius: 7px;
+}
+
+.header-left h1 {
     margin: 0;
     font-size: 24px;
-  }
-  
-  .header-right {
+}
+
+.header-right {
     display: flex;
     gap: 10px;
-  }
-  
-  .btn-login, .btn-signup {
+}
+
+.btn-login, .btn-signup {
     background-color: transparent;
     border: none;
     padding: 0;
-  }
-  
-  .btn-login a, .btn-signup a {
+}
+
+.btn-login a, .btn-signup a {
     display: inline-block;
     padding: 5px 10px;
     font-size: 14px;
     text-decoration: none;
     color: inherit;
     border-radius: 8px;
-  }
-  
-  .btn-login a {
+}
+
+.btn-login a {
     background-color: #000;
     color: #fff;
     border: 1px solid #fff;
-  }
-  
-  .btn-signup a {
+}
+
+.btn-signup a {
     background-color: #fff;
     color: #000;
     border: 1px solid #000;
-  }
-  
-  .btn-login a:hover, .btn-signup a:hover {
+}
+
+.btn-login a:hover, .btn-signup a:hover {
     opacity: 0.8;
-  }
-  
+}

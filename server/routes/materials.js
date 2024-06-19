@@ -3,6 +3,8 @@ const router = express.Router();
 const materialController = require('../controllers/materialController');
 const { protect, admin } = require('../middleware/authMiddleware');
 
+router.get('/unassigned', protect, materialController.getUnassignedMaterials);
+
 router.route('/')
     .get(protect, admin, materialController.getAllMaterials)
     .post(protect, admin, materialController.createMaterial);

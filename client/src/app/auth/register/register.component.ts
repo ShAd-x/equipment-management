@@ -2,18 +2,18 @@ import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; // Importez CommonModule
-import { HeaderComponent } from '../../header/header.component'; // Importez HeaderComponent
+import { CommonModule } from '@angular/common';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['./register.component.scss', '../../app.component.scss'],
   standalone: true,
   imports: [
     FormsModule,
-    CommonModule, // Ajoutez CommonModule ici
-    HeaderComponent // Ajoutez HeaderComponent ici
+    CommonModule,
+    HeaderComponent
   ],
 })
 export class RegisterComponent {
