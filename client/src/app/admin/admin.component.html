@@ -1,0 +1,61 @@
+<app-header-post-login></app-header-post-login>
+
+<main>
+  <h2>Administration</h2>
+  
+  <div class="admin-container">
+    <div class="requests">
+      <h3>Demande d'attribution</h3>
+      <div class="filter">
+        <label for="filter-type">Type :</label>
+        <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of filteredMaterialRequests">
+            <td>{{ request.type }}</td>
+            <td>
+              <button class="btn-approve" (click)="approveRequest(request)">Accorder</button>
+              <button class="btn-deny" (click)="denyRequest(request)">Refuser</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="inventory">
+      <h3>Liste matériel renseigné</h3>
+      <div class="filter">
+        <label for="filter-type">Type :</label>
+        <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Location</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let material of filteredMaterials">
+            <td>{{ material.type }}</td>
+            <td>{{ material.location }}</td>
+            <td>
+              <button class="btn-remove" (click)="removeMaterial(material)">Retirer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="add-material">
+        <button class="btn-add" (click)="addMaterial()">Ajouter un matériel</button>
+      </div>
+    </div>
+  </div>
+</main>
