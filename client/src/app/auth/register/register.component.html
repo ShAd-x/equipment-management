@@ -1,44 +1,35 @@
-<header>
-    <div class="header-left">
-      <h1>Gestion Matériel Université</h1>
-    </div>
-    <div class="header-right">
-      <button class="btn-login">
-        <a href="/login">
-          Se connecter
-        </a>
-      </button>
-      <button class="btn-signup">
-        <a href="/register">
-          Créer un compte
-        </a>
-      </button>
-    </div>
-</header>
+<app-header></app-header>
+
 <main>
-<div class="register-container">
+  <h2>Créer un compte</h2>
+  <p>Veuillez remplir les informations ci-dessous pour créer un compte.</p>
+  
+  <div class="register-container">
     <form (submit)="register()">
-        <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" id="name" [(ngModel)]="user.name" name="name" required>
-        </div>
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
-        </div>
-        <div class="form-group">
-            <label for="role">Role:</label>
-            <select id="role" [(ngModel)]="user.role" name="role" required>
-              <option value="1">User</option>
-              <option value="2">Organization</option>
-              <option value="0">Admin</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Register</button>
+      <div class="form-group">
+        <label for="name">Nom:</label>
+        <input type="text" id="name" [(ngModel)]="user.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [(ngModel)]="user.email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" [(ngModel)]="user.password" name="password" required>
+      </div>
+      <div class="form-group">
+        <label for="role">Rôle:</label>
+        <select id="role" [(ngModel)]="user.role" name="role" required>
+          <option value="1">Utilisateur</option>
+          <option value="2">Organisation</option>
+          <option value="0">Admin</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button type="button" class="btn-cancel" (click)="cancel()">Annuler</button>
+        <button type="submit" class="btn-submit">Créer le compte</button>
+      </div>
     </form>
-    </div>
+  </div>
 </main>
