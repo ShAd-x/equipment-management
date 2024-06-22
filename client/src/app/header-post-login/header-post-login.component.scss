@@ -31,6 +31,10 @@ header {
     transition: background-color 0.3s;
 }
 
+a {
+    text-decoration: none;
+}
+
 .header-center .nav-link:hover {
     background-color: #555;
 }
@@ -38,6 +42,20 @@ header {
 .header-right {
     display: flex;
     gap: 10px;
+}
+
+.btn-profile {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.btn-profile:hover {
+    background-color: #0056b3;
 }
 
 .btn-logout {

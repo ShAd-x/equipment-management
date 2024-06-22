@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 const userController = {
     getAllUsers: async (_req, res) => {
@@ -54,7 +55,49 @@ const userController = {
         } catch (error) {
             res.status(400).json({ message: error.message });
         }
-    }
+    },
+
+    getProfile: async (req, res) => {
+        try {
+            const user = await User.findById(req.user._id).select('-password');
+            if (!user) {
+                return res.status(404).json({ message: 'User not found' });
+            }
+            res.json(user);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    updateProfile: async (req, res) => {
+        const { name, email, currentPassword, newPassword } = req.body;
+        const userId = req.user._id;
+
+        try {
+          const user = await User.findById(userId);
+          if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+          }
+
+          // Vérifier le mot de passe actuel si un nouveau mot de passe est fourni
+          if (newPassword && currentPassword) {
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
+            if (!isMatch) {
+              return res.status(400).json({ message: 'Mot de passe actuel incorrect' });
+            }
+            user.password = await bcrypt.hash(newPassword, 10);
+          }
+
+          if (name) user.name = name;
+          if (email) user.email = email;
+
+          await user.save();
+
+          res.json({ message: 'Profil mis à jour avec succès' });
+        } catch (error) {
+          res.status(500).json({ message: error.message });
+        }
+    },
 };
 
 module.exports = userController;

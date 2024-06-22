@@ -5,6 +5,7 @@ import { MaterialRequestComponent } from './material-request/material-request.co
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './auth/register/register.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/my-material', pathMatch: 'full' },
@@ -13,5 +14,6 @@ export const routes: Routes = [
   { path: 'my-material', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'material-request', component: MaterialRequestComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/my-material' },
 ];

@@ -16,19 +16,18 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { routes } from './app.routes';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DashboardComponent,
-    MaterialRequestComponent,
-    LoginComponent,
-    RegisterComponent,
-    HeaderComponent, // Déclarez votre HeaderComponent ici
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    AppComponent,
+    DashboardComponent,
+    MaterialRequestComponent,
+    LoginComponent,
+    RegisterComponent,
+    HeaderComponent,
   ],
   providers: [
     AuthService,
@@ -38,6 +37,6 @@ import { routes } from './app.routes';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
