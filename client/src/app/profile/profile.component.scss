@@ -1,3 +1,5 @@
+/* Styles pour le formulaire de profil */
+
 .profile-container {
     max-width: 400px;
     margin: 50px auto;
@@ -5,32 +7,67 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-}
-
-.form-group {
+  }
+  
+  .form-group {
     margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligne les labels à gauche */
+  }
+  
+  .form-group label {
     margin-bottom: 5px;
-}
-
-.form-group input {
+  }
+  
+  .form-group input {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-}
-
-.btn {
-    width: 100%;
+  }
+  
+  .btn {
+    width: 48%;
     padding: 10px;
-    background-color: #007bff;
     border: none;
     color: white;
     cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #0056b3;
-}
+    text-align: center;
+  }
+  
+  .btn-cancel {
+    background-color: #6c757d;
+    margin-right: 4%;
+  }
+  
+  .btn-cancel:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-submit {
+    background-color: #28a745;
+  }
+  
+  .btn-submit:hover {
+    background-color: #218838;
+  }
+  
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .message {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    text-align: center;
+  }
+  
+  .main-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  

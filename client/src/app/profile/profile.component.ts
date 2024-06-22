@@ -62,4 +62,8 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+
+  cancel() {
+    this.router.navigate(['/']); // Modifier cette ligne selon votre logique de navigation
+  }
 }
