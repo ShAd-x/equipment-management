@@ -13,7 +13,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'my-material', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'material-request', component: MaterialRequestComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/my-material' },
 ];
