@@ -54,6 +54,9 @@ const assignmentRequestController = {
             request.status = 'approuve';
             await request.save();
 
+            // Supprimer les autres demandes pour le même matériel
+            await AssignmentRequest.deleteMany({ material: material._id, status: 'en attente' });
+
             res.json({ message: 'Request approved and material updated' });
         } catch (error) {
             res.status(500).json({ message: error.message });
