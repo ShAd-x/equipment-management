@@ -1,4 +1,6 @@
 const Material = require('../models/Material');
+const Roles = require('../models/Role');
+const User = require('../models/User');
 
 const materialController = {
     getAllMaterials: async (_req, res) => {
@@ -51,9 +53,17 @@ const materialController = {
         }
     },
 
-    getUnassignedMaterials: async (_req, res) => {
+    getUnassignedMaterials: async (req, res) => {
         try {
-            const materials = await Material.find({ utilisePar: { $exists: false } });
+            const userId = req.user._id;
+            const user = await User.findById(userId);
+
+            var materials;
+            if (user.role === Roles.ADMIN || user.role === Roles.ORGANISATION) {
+                materials = await Material.find({ utilisePar: { $exists: false } });
+            } else {
+                materials = await Material.find({ utilisePar: { $exists: false }, organisation: false });
+            }
             res.json(materials);
         } catch (error) {
             res.status(500).json({ message: error.message });
