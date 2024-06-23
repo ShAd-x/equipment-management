@@ -59,7 +59,10 @@ export class AdminComponent implements OnInit {
 
   approveRequest(requestId: string | undefined) {
     this.apiService.put(`assignment-requests/${requestId}/approve`, {})
-      .subscribe(() => this.getMaterialRequests());
+      .subscribe(() => {
+        this.getMaterialRequests()
+        this.getMaterials()
+      });
   }
 
   denyRequest(requestId: string | undefined) {
