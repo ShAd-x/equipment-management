@@ -5,6 +5,7 @@
   <div class="header-center">
     <a routerLink="/my-material" class="nav-link">Mon matériel</a>
     <a routerLink="/material-request" class="nav-link">Demande de matériel</a>
+    <a routerLink="/admin" class="nav-link" *ngIf="isAdmin()">Administration</a>
   </div>
   <div class="header-right">
     <a routerLink="/profile" class="btn-profile">Mon profil</a>

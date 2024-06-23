@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../header/header.component';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-login',
@@ -39,8 +40,9 @@ export class LoginComponent {
     }
 
     this.authService.login(this.loginForm.value).subscribe(
-      (res: { token: string; }) => {
+      (res: { token: string, user: User }) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('currentUser', JSON.stringify(res.user));
         this.router.navigate(['/']);
       },
       (err: any) => {

@@ -18,4 +18,8 @@ export class HeaderPostLoginComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
+
+  isAdmin () {
+    return this.authService.isAdmin();
+  }
 }
