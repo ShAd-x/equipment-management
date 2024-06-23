@@ -16,18 +16,27 @@ import { ApiService } from '../services/api.service';
 })
 export class DashboardComponent implements OnInit {
   materials: Material[] = [];
+  assignedMaterials: Material[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
   constructor(private authService: AuthService, private router: Router, private apiService: ApiService) {}
 
   ngOnInit() {
-    // this.materials = this.apiService.get<Material[]>('materials');
+    this.getAssignedMaterials();
     this.applyFilter();
   }
 
+  getAssignedMaterials() {
+    this.apiService.get<Material[]>('materials/assigned')
+      .subscribe(materials => {
+        this.assignedMaterials = materials;
+        this.applyFilter(); // Applique le filtre après avoir récupéré les matériels
+      });
+  }
+
   applyFilter() {
-    this.filteredMaterials = this.materials.filter(material =>
+    this.filteredMaterials = this.assignedMaterials.filter(material =>
       material.type.toLowerCase().includes(this.filterType.toLowerCase())
     );
   }
@@ -37,7 +46,16 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  redirectToMaterialRequest() {
+  requestMaterial() {
     this.router.navigate(['/material-request']);
+  }
+
+  removeMaterial(materialId?: string) {
+    if (materialId) {
+      this.apiService.delete(`materials/${materialId}`)
+        .subscribe(() => {
+          this.getAssignedMaterials();
+        });
+    }
   }
 }

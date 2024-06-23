@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HeaderPostLoginComponent } from '../header-post-login/header-post-login.component';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../services/api.service';
 import { Material } from '../models/material';
+import { HeaderPostLoginComponent } from '../header-post-login/header-post-login.component';
 
 @Component({
   selector: 'app-material-request',
@@ -15,53 +14,40 @@ import { Material } from '../models/material';
   imports: [CommonModule, FormsModule, HeaderPostLoginComponent]
 })
 export class MaterialRequestComponent implements OnInit {
-  unassignedMaterials: Material[] = [];
+  materials: Material[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
-  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   ngOnInit() {
-    this.getUnassignedMaterials();
-    this.applyFilter();
+    this.getMaterials();
   }
 
-  // Récupérer les matériels non assignés
-  getUnassignedMaterials() {
+  getMaterials() {
     this.apiService.get<Material[]>('materials/unassigned')
       .subscribe(materials => {
-        this.unassignedMaterials = materials;
+        this.materials = materials;
         this.filteredMaterials = materials;
       });
   }
 
-  requestMaterial(materialId: string) {
-    this.apiService.post('assignment-requests', { materialId })
-      .subscribe(
-        response => {
-          console.log('Material request created:', response);
-          this.getUnassignedMaterials();
-        },
-        error => {
-          console.error('Error creating material request:', error);
-        }
-      );
-  }
-
-  onRequestMaterial(material: Material) {
-    if (material._id) {
-      this.requestMaterial(material._id);
-    }
-  }
-
-  // Filtrer les matériels non assignés par type
   applyFilter() {
-    this.filteredMaterials = this.unassignedMaterials.filter(material =>
+    this.filteredMaterials = this.materials.filter(material =>
       material.type.toLowerCase().includes(this.filterType.toLowerCase())
     );
   }
 
+  requestMaterial(materialId?: string) {
+    if (materialId) {
+      this.apiService.post('assignment-requests', { materialId })
+        .subscribe(() => {
+          this.getMaterials();
+        });
+    }
+  }
+
   goBack() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/dashboard']);
   }
 }

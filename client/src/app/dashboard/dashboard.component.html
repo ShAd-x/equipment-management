@@ -1,35 +1,38 @@
 <app-header-post-login></app-header-post-login>
 
-<main>
+<main class="main-container">
   <h2>Tableau de bord</h2>
-  
-  <div class="dashboard">
+
+  <div class="dashboard-container">
     <div class="filter">
       <label for="filter-type">Type :</label>
       <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
     </div>
-    
     <h3>Mon matériel attribué</h3>
     <table>
       <thead>
         <tr>
+          <th>Intitulé</th>
           <th>Type</th>
+          <th>Salle</th>
+          <th>Réservé aux organisations</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let material of filteredMaterials">
+          <td>{{ material.intitule }}</td>
           <td>{{ material.type }}</td>
+          <td>{{ material.salle }}</td>
+          <td>{{ material.organisation ? 'Oui' : 'Non' }}</td>
           <td>
-            <button class="btn-return">Rendre</button>
-            <button class="btn-consult">Consulter</button>
+            <button class="btn-remove" (click)="removeMaterial(material._id)">Retirer</button>
           </td>
         </tr>
       </tbody>
     </table>
-    
-    <div class="request-material">
-      <button class="btn-request-material" (click)="redirectToMaterialRequest()">Demande de matériel</button>
+    <div class="btn-request-container">
+      <button class="btn-request" (click)="requestMaterial()">Demande de matériel</button>
     </div>
   </div>
 </main>
