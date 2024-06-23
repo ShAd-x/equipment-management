@@ -3,7 +3,7 @@ const Material = require('../models/Material');
 const materialController = {
     getAllMaterials: async (_req, res) => {
         try {
-            const materials = await Material.find();
+            const materials = await Material.find().populate('utilisePar', 'name');
             res.json(materials);
         } catch (error) {
             res.status(500).json({ message: error.message });
