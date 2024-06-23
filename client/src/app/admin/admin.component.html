@@ -22,7 +22,7 @@
         <tbody>
           <tr *ngFor="let request of filteredMaterialRequests">
             <td>{{ request.material.type }}</td>
-            <td>{{ request.status }}</td> <!-- Assurez-vous que c'est 'status' ici -->
+            <td>{{ request.status }}</td>
             <td>{{ request.user.name }}</td>
             <td>
               <button class="btn-approve" (click)="approveRequest(request._id)">Accorder</button>
@@ -42,7 +42,7 @@
       <table>
         <thead>
           <tr>
-            <th>Intitulé</th> <!-- Ajouter la colonne 'Intitulé' -->
+            <th>Intitulé</th>
             <th>Type</th>
             <th>Utilisé par</th>
             <th>Salle</th>
@@ -52,7 +52,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let material of filteredMaterials">
-            <td>{{ material.intitule }}</td> <!-- Assurez-vous que c'est 'intitule' ici -->
+            <td>{{ material.intitule }}</td>
             <td>{{ material.type }}</td>
             <td>{{ material.utilisePar?.name }}</td>
             <td>{{ material.salle }}</td>
