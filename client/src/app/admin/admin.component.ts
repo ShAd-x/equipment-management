@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 import { AssignmentRequest } from '../models/assignmentRequest';
 import { Material } from '../models/material';
 import { ApiService } from '../services/api.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddMaterialDialogComponent } from '../add-material-dialog/add-material-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -22,14 +24,7 @@ export class AdminComponent implements OnInit {
   filteredMaterials: Material[] = [];
   filterType: string = '';
 
-  newMaterial: Material = {
-    type: '',
-    organisation: false,
-    salle: '',
-    utilisePar: undefined
-  };
-
-  constructor(private http: HttpClient, private router: Router, private apiService: ApiService) {}
+  constructor(private http: HttpClient, private router: Router, private apiService: ApiService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.getMaterialRequests();
@@ -41,7 +36,6 @@ export class AdminComponent implements OnInit {
       .subscribe(requests => {
         this.materialRequests = requests;
         this.filteredMaterialRequests = requests;
-        console.log(requests);
       });
   }
 
@@ -78,16 +72,17 @@ export class AdminComponent implements OnInit {
       .subscribe(() => this.getMaterials());
   }
 
-  addMaterial() {
-    this.apiService.post(`materials/`, this.newMaterial)
-      .subscribe(() => {
-        this.getMaterials();
-        this.newMaterial = {
-          type: '',
-          salle: '',
-          organisation: false,
-          utilisePar: undefined
-        };
-      });
+  openAddMaterialDialog(): void {
+    const dialogRef = this.dialog.open(AddMaterialDialogComponent, {
+      width: '400px',
+      data: { intitule: '', type: '', salle: '', organisation: false }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.apiService.post('materials', result)
+          .subscribe(() => this.getMaterials());
+      }
+    });
   }
 }

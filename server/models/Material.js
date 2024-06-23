@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const MaterialSchema = new Schema({
+    intitule: String, // Ajoutez cette ligne
     type: String,
     etat: String,
     salle: String,

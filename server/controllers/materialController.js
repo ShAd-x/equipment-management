@@ -21,7 +21,8 @@ const materialController = {
     },
 
     createMaterial: async (req, res) => {
-        const material = new Material(req.body);
+        const { type, salle, organisation } = req.body;
+        const material = new Material({ type, salle, organisation });
         try {
             const newMaterial = await material.save();
             res.status(201).json(newMaterial);

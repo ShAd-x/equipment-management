@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -22,6 +26,9 @@ import { routes } from './app.routes';
     HttpClientModule,
     RouterModule.forRoot(routes),
     FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatButtonModule,
     AppComponent,
     DashboardComponent,
     MaterialRequestComponent,
@@ -37,6 +44,6 @@ import { routes } from './app.routes';
       multi: true
     }
   ],
-  bootstrap: []
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

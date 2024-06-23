@@ -5,5 +5,5 @@ export interface AssignmentRequest {
     _id?: string;
     material: Material;
     user: User;
-    statut: string;
+    status: string;
 }

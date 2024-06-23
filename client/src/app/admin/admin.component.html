@@ -14,7 +14,7 @@
         <thead>
           <tr>
             <th>Type</th>
-            <th>Etat</th>
+            <th>État</th>
             <th>Utilisateur demandant</th>
             <th>Action</th>
           </tr>
@@ -22,7 +22,7 @@
         <tbody>
           <tr *ngFor="let request of filteredMaterialRequests">
             <td>{{ request.material.type }}</td>
-            <td>{{ request.statut }}</td>
+            <td>{{ request.status }}</td> <!-- Assurez-vous que c'est 'status' ici -->
             <td>{{ request.user.name }}</td>
             <td>
               <button class="btn-approve" (click)="approveRequest(request._id)">Accorder</button>
@@ -42,6 +42,7 @@
       <table>
         <thead>
           <tr>
+            <th>Intitulé</th> <!-- Ajouter la colonne 'Intitulé' -->
             <th>Type</th>
             <th>Utilisé par</th>
             <th>Salle</th>
@@ -51,6 +52,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let material of filteredMaterials">
+            <td>{{ material.intitule }}</td> <!-- Assurez-vous que c'est 'intitule' ici -->
             <td>{{ material.type }}</td>
             <td>{{ material.utilisePar?.name }}</td>
             <td>{{ material.salle }}</td>
@@ -62,22 +64,7 @@
         </tbody>
       </table>
       <div class="add-material">
-        <h3>Ajouter un matériel</h3>
-        <form (ngSubmit)="addMaterial()">
-          <div class="form-group">
-            <label for="material-type">Type</label>
-            <input type="text" id="material-type" [(ngModel)]="newMaterial.type" name="type" required>
-          </div>
-          <div class="form-group">
-            <label for="material-location">Salle</label>
-            <input type="text" id="material-location" [(ngModel)]="newMaterial.salle" name="location" required>
-          </div>
-          <div class="form-group">
-            <label for="reserveAuxOrganisations">Réservé aux organisations</label>
-            <input type="checkbox" id="reserveAuxOrganisations" [(ngModel)]="newMaterial.organisation" name="reserveAuxOrganisations">
-          </div>
-          <button type="submit" class="btn-add">Ajouter</button>
-        </form>
+        <button (click)="openAddMaterialDialog()" class="btn btn-primary">Ajouter un matériel +</button>
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptorService } from './app/services/token-interceptor.service';
 import { FormsModule } from '@angular/forms';
 import { importProvidersFrom } from '@angular/core';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -17,6 +18,6 @@ bootstrapApplication(AppComponent, {
       useClass: TokenInterceptorService,
       multi: true
     },
-    provideRouter(routes)
+    provideRouter(routes), provideAnimationsAsync()
   ]
 }).catch(err => console.error(err));

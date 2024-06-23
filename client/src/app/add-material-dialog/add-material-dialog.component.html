@@ -1,0 +1,22 @@
+<h2 mat-dialog-title>Ajouter un matériel</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Intitulé du matériel</mat-label>
+      <input matInput [(ngModel)]="data.intitule" name="intitule" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <input matInput [(ngModel)]="data.type" name="type" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Salle</mat-label>
+      <input matInput [(ngModel)]="data.salle" name="salle" required>
+    </mat-form-field>
+    <mat-checkbox [(ngModel)]="data.organisation" name="organisation">Réservé aux organisations</mat-checkbox>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>Ajouter</button>
+</mat-dialog-actions>
