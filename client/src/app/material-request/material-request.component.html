@@ -8,6 +8,9 @@
       <label for="filter-type">Type :</label>
       <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
     </div>
+
+    <div *ngIf="message" class="message">{{ message }}</div>
+
     <table>
       <thead>
         <tr>

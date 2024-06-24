@@ -20,14 +20,19 @@ const assignmentRequestController = {
         try {
             const material = await Material.findById(materialId);
             if (!material) {
-                return res.status(404).json({ message: 'Material not found' });
+                return res.status(404).json({ message: 'Materiel introuvable' });
             }
 
             if (material.organisation) {
                 const user = await User.findById(userId);
                 if (user.role !== Roles.ADMIN && user.role !== Roles.ORGANISATION) {
-                    return res.status(403).json({ message: 'Only organizations or admins can request this material' });
+                    return res.status(403).json({ message: 'Seul un administrateur ou une organisation peut demander un matériel d\'organisation' });
                 }
+            }
+
+            const existingRequest = await AssignmentRequest.findOne({ material: materialId, user: userId }).where('status').equals('en attente');
+            if (existingRequest) {
+                return res.status(400).json({ message: 'Demande déjà existante' });
             }
 
             const request = new AssignmentRequest({ material: materialId, user: userId });

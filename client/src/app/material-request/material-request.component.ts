@@ -17,6 +17,7 @@ export class MaterialRequestComponent implements OnInit {
   materials: Material[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
+  message: string = '';
 
   constructor(private apiService: ApiService, private router: Router) {}
 
@@ -41,9 +42,15 @@ export class MaterialRequestComponent implements OnInit {
   requestMaterial(materialId?: string) {
     if (materialId) {
       this.apiService.post('assignment-requests', { materialId })
-        .subscribe(() => {
-          this.getMaterials();
-        });
+        .subscribe(
+          () => {
+            this.message = 'Demande de matériel envoyée avec succès';
+            this.getMaterials();
+          },
+          error => {
+            this.message = `${error.error.message}`;
+          }
+        );
     }
   }
 

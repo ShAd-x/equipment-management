@@ -44,6 +44,6 @@ import { routes } from './app.routes';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: []
 })
 export class AppModule { }
