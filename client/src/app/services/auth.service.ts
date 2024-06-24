@@ -3,18 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../config';
 import { Role } from '../models/Role';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private apiUrl = environment.apiUrl + '/auth';
-  private currentUserSubject: BehaviorSubject<any>;
   public currentUser: any;
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser') || '{}'));
-    this.currentUser = this.currentUserSubject.asObservable();
   }
 
   register(user: any): Observable<any> {
@@ -31,7 +29,6 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
     localStorage.removeItem('token');
   }
 
@@ -39,11 +36,13 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  public get currentUserValue(): any {
-    return this.currentUserSubject.value;
+  getUser(): User | null {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
   }
 
   isAdmin(): boolean {
-    return this.currentUserValue.role === Role.Admin;
+    const user = this.getUser();
+    return user !== null && user.role === Role.Admin;
   }
 }

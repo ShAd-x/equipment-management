@@ -62,7 +62,7 @@ const materialController = {
             if (user.role === Roles.ADMIN || user.role === Roles.ORGANISATION) {
                 materials = await Material.find({ utilisePar: { $exists: false }, utilisePar: null });
             } else {
-                materials = await Material.find({ utilisePar: { $exists: false }, organisation: false });
+                materials = await Material.find({ utilisePar: { $exists: false }, utilisePar: null, organisation: false });
             }
             res.json(materials);
         } catch (error) {
