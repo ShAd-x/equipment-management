@@ -29,12 +29,14 @@
               <button class="btn-deny" (click)="denyRequest(request._id)">Refuser</button>
             </td>
           </tr>
+          <tr *ngIf="filteredMaterialRequests.length === 0">
+            <td colspan="4">Aucune demande d'attribution</td>
         </tbody>
       </table>
     </div>
 
     <div class="inventory">
-      <h3>Liste matériel renseigné</h3>
+      <h3>Liste du matériel</h3>
       <div class="filter">
         <label for="filter-type">Type :</label>
         <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
@@ -58,9 +60,11 @@
             <td>{{ material.salle }}</td>
             <td>{{ material.organisation ? 'Oui' : 'Non' }}</td>
             <td>
-              <button class="btn-remove" (click)="removeMaterial(material)">Retirer</button>
+              <button class="btn-remove" (click)="removeMaterial(material)">Supprimer</button>
             </td>
           </tr>
+          <tr *ngIf="filteredMaterials.length === 0">
+            <td colspan="6">Aucun matériel</td>
         </tbody>
       </table>
       <div class="add-material">

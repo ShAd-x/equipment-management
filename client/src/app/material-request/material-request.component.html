@@ -28,6 +28,8 @@
             <button class="btn-request" (click)="requestMaterial(material._id)">Demander</button>
           </td>
         </tr>
+        <tr *ngIf="filteredMaterials.length === 0">
+          <td colspan="5">Aucun matériel disponible</td>
       </tbody>
     </table>
     <div class="btn-back-container">
