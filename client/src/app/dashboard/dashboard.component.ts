@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
   assignedMaterials: Material[] = [];
   filteredMaterials: Material[] = [];
   filterType: string = '';
+  newRoom: string = '';
+  selectedMaterial: Material | null = null;
 
   constructor(private authService: AuthService, private router: Router, private apiService: ApiService) {}
 
@@ -31,8 +33,35 @@ export class DashboardComponent implements OnInit {
     this.apiService.get<Material[]>('materials/assigned')
       .subscribe(materials => {
         this.assignedMaterials = materials;
-        this.applyFilter(); // Applique le filtre après avoir récupéré les matériels
+        this.applyFilter();
       });
+  }
+
+  returnMaterial(materialId: string) {
+    this.apiService.put<Material>(`materials/return/${materialId}`, {}).subscribe(
+      () => {
+        this.getAssignedMaterials();
+      },
+      error => {
+        console.error('Erreur lors du retour du matériel :', error);
+      }
+    );
+  }
+
+  updateMaterialRoom(materialId: string) {
+    if (this.newRoom) {
+      var salle: string = this.newRoom;
+      this.apiService.put<Material>(`materials/update-room/${materialId}`, { salle }).subscribe(
+        () => {
+          this.getAssignedMaterials();
+          this.selectedMaterial = null;
+          this.newRoom = '';
+        },
+        error => {
+          console.error('Erreur lors de la mise à jour de la salle :', error);
+        }
+      );
+    }
   }
 
   applyFilter() {

@@ -26,8 +26,18 @@
           <td>{{ material.salle }}</td>
           <td>{{ material.organisation ? 'Oui' : 'Non' }}</td>
           <td>
-            <button class="btn-remove" (click)="removeMaterial(material._id)">Retirer</button>
+            <button class="btn-remove" *ngIf="material._id" (click)="returnMaterial(material._id)">Rendre</button>
+            <button class="btn-change" (click)="selectedMaterial = material">Modifier la salle</button>
+
+            <div *ngIf="selectedMaterial === material">
+              <input [(ngModel)]="newRoom" placeholder="Nouvelle salle">
+              <button *ngIf="material._id" (click)="updateMaterialRoom(material._id)">Enregistrer</button>
+              <button (click)="selectedMaterial = null">Annuler</button>
+            </div>
           </td>
+        </tr>
+        <tr *ngIf="filteredMaterials.length === 0">
+          <td colspan="5">Aucun matériel attribué</td>
         </tr>
       </tbody>
     </table>

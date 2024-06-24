@@ -69,6 +69,65 @@ const materialController = {
             res.status(500).json({ message: error.message });
         }
     },
+
+    getAssignedMaterials: async (req, res) => {
+        try {
+            const userId = req.user._id;
+            const materials = await Material.find({ utilisePar: userId });
+            res.json(materials);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    returnMaterial: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const materialId = req.params.id;
+
+            const material = await Material.findById(materialId);
+
+            if (!material) {
+                return res.status(404).json({ message: 'Matériel non trouvé' });
+            }
+
+            if (material.utilisePar.toString() !== userId) {
+                return res.status(401).json({ message: 'Non autorisé à rendre ce matériel' });
+            }
+
+            material.utilisePar = null;
+            await material.save();
+
+            res.json({ message: 'Matériel rendu avec succès' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
+    updateMaterialRoom: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const materialId = req.params.id;
+            const { salle } = req.body;
+
+            const material = await Material.findById(materialId);
+
+            if (!material) {
+                return res.status(404).json({ message: 'Matériel non trouvé' });
+            }
+
+            if (material.utilisePar.toString() !== userId) {
+                return res.status(401).json({ message: 'Non autorisé à modifier ce matériel' });
+            }
+
+            material.salle = salle;
+            await material.save();
+
+            res.json({ message: 'Salle mise à jour avec succès' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 };
 
 module.exports = materialController;
