@@ -11,7 +11,7 @@ import { AdminGuard } from './guards/admin.guard';
 export const routes: Routes = [
   { path: '', redirectTo: '/my-material', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent, canActivate: [AdminGuard]},
   { path: 'my-material', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'material-request', component: MaterialRequestComponent, canActivate: [AuthGuard] },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard] },
