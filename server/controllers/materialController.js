@@ -60,7 +60,7 @@ const materialController = {
 
             var materials;
             if (user.role === Roles.ADMIN || user.role === Roles.ORGANISATION) {
-                materials = await Material.find({ utilisePar: { $exists: false } });
+                materials = await Material.find({ utilisePar: { $exists: false }, utilisePar: null });
             } else {
                 materials = await Material.find({ utilisePar: { $exists: false }, organisation: false });
             }
