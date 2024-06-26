@@ -13,7 +13,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MaterialRequestComponent } from './material-request/material-request.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-import { HeaderComponent } from './header/header.component'; // Importez votre HeaderComponent
+import { HeaderComponent } from './header/header.component';
 
 import { AuthService } from './services/auth.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';

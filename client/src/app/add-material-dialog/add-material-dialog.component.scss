@@ -3,37 +3,37 @@
   color: #000;
   border-radius: 8px;
   padding: 20px;
-  max-width: 500px; // Limite la largeur maximale
-  margin: 0 auto; // Centre horizontalement
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .mat-dialog-title {
   font-size: 24px;
   font-weight: bold;
   color: #333;
-  text-align: center; // Centre le titre
+  text-align: center;
 }
 
 .mat-dialog-content {
   display: flex;
   flex-direction: column;
-  align-items: center; // Centre les champs du formulaire
+  align-items: center;
   width: 100%;
 }
 
 .mat-form-field {
-  width: 100%; // Assure que les champs de formulaire prennent toute la largeur
-  margin-bottom: 20px; // Ajoute un espace entre les champs
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .mat-checkbox {
-  align-self: flex-start; // Aligne la checkbox à gauche
+  align-self: flex-start;
 }
 
 .mat-dialog-actions {
   display: flex;
-  justify-content: space-between; // Répartit les boutons de manière uniforme
-  width: 100%; // Assure que les actions prennent toute la largeur
+  justify-content: space-between;
+  width: 100%;
 }
 
 .mat-button {
@@ -46,5 +46,5 @@
 }
 
 form {
-  width: 100%; // Assure que le formulaire prend toute la largeur
+  width: 100%;
 }

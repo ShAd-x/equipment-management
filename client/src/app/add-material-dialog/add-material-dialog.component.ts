@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDialogModule } from '@angular/material/dialog'; // Importer MatDialogModule
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-material-dialog',
@@ -19,7 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog'; // Importer MatDialo
     MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
-    MatDialogModule // Ajouter MatDialogModule aux imports
+    MatDialogModule,
   ]
 })
 export class AddMaterialDialogComponent {
