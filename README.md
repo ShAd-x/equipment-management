@@ -1,3 +1,7 @@
+Site web de gestion de matériel fait avec Angular, Express et MongoDB.
+Utilisation de Mongoose et JWT (JSON Web Token).
+Projet réalisé par CHRETIEN Adrien et TATARKOVIC Alexis.
+
 # Projet
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
