@@ -6,6 +6,8 @@
     <a routerLink="/my-material" class="nav-link">Mon matériel</a>
     <a routerLink="/material-request" class="nav-link">Demande de matériel</a>
     <a routerLink="/admin" class="nav-link" *ngIf="isAdmin()">Administration</a>
+    <a routerLink="/register" class="nav-link" *ngIf="isAdmin()">Créer un utilisateur</a>
+    <a routerLink="/users" class="nav-link" *ngIf="isAdmin()">Liste des utilisateurs</a>
   </div>
   <div class="header-right">
     <a routerLink="/profile" class="btn-profile">Mon profil</a>

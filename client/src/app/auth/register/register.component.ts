@@ -3,19 +3,19 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../../header/header.component';
+import { HeaderPostLoginComponent } from "../../header-post-login/header-post-login.component";
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss', '../../app.component.scss'],
-  standalone: true,
-  imports: [
-    FormsModule,
-    CommonModule,
-    ReactiveFormsModule,
-    HeaderComponent
-  ],
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss', '../../app.component.scss'],
+    standalone: true,
+    imports: [
+        FormsModule,
+        CommonModule,
+        ReactiveFormsModule,
+        HeaderPostLoginComponent
+    ]
 })
 export class RegisterComponent {
   registerForm: FormGroup;

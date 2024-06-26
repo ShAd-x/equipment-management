@@ -10,6 +10,19 @@ const userController = {
             res.status(500).json({ message: error.message });
         }
     },
+
+    deleteUser: async (req, res) => {
+        try {
+            const user = await User.findByIdAndDelete(req.params.id);
+            if (!user) {
+                return res.status(404).json({ message: 'Utilisateur non trouvé' });
+            }
+            res.json({ message: 'Utilisateur supprimé avec succès' });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    },
+
     createUser: async (req, res) => {
         const user = new User({
             name: req.body.name,
@@ -29,6 +42,7 @@ const userController = {
             res.status(400).json({ message: error.message });
         }
     },
+
     updateUser: async (req, res) => {
         try {
             const user = await User.findById(req.params.id);
