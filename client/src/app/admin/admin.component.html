@@ -10,6 +10,7 @@
         <label for="filter-type">Type :</label>
         <input type="text" id="filter-type" placeholder="Filtrer par type" [(ngModel)]="filterType" (input)="applyFilter()">
       </div>
+      <p>Nombre de demandes : {{ materialRequests.length }}</p>
       <table>
         <thead>
           <tr>
